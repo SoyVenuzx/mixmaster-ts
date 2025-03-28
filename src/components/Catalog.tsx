@@ -1,16 +1,53 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DrinkCard from './DrinkCard'
 import RecipeModal from './RecipeModal'
-import { drinks } from '@/data/drinks'
 import type { Drink } from '@/types'
 import SearchFilter from './SearchFilter'
+import { useAppStore } from '@/hooks/useAppStore'
+import { useRecipes } from '@/hooks/responses/useRecipes'
+import { LoadingSpinner } from './LoadingSpinner'
+import { useInView } from 'react-intersection-observer'
 
 export default function Catalog () {
   const [selectedDrink, setSelectedDrink] = useState<Drink | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  const { ref, inView } = useInView({ threshold: 0 })
+
+  const {
+    searchCategory,
+    searchAlcoholic,
+    flag,
+    setFlag,
+    drinkSearched,
+    category,
+    recipes,
+    alcoholic
+  } = useAppStore()
+  const {
+    recipes: data,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage
+  } = useRecipes({
+    ingredient: drinkSearched,
+    category,
+    alcoholic
+  })
+
+  useEffect(() => {
+    setFlag(true)
+  }, [])
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage()
+    }
+  }, [hasNextPage, inView, fetchNextPage])
+
   const openModal = (drink: Drink) => {
-    setSelectedDrink(drink)
+    // setSelectedDrink(drink)
     setIsModalOpen(true)
   }
 
@@ -31,14 +68,41 @@ export default function Catalog () {
 
         <SearchFilter />
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-          {drinks.map(drink => (
-            <DrinkCard
-              key={drink.id}
-              drink={drink}
-              onClick={() => openModal(drink)}
-            />
-          ))}
+        {isLoading && <LoadingSpinner size={48} />}
+
+        <div className='flex flex-col flex-grow gap-y-6'>
+          {recipes?.recipes?.pages.map(page => {
+            return (
+              <div
+                key={`drink-${Date.now()}-${Math.floor(
+                  Math.random() * 1000000
+                )}`}
+                className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'
+              >
+                {page?.data.map(drink => {
+                  const drinkItem = {
+                    id: drink.idDrink,
+                    name: drink.strDrink,
+                    image: drink.strDrinkThumb,
+                    alcoholic: searchAlcoholic === 'Alcoholic',
+                    category: searchCategory
+                  }
+
+                  return (
+                    <div>
+                      <DrinkCard
+                        key={`drink-${Date.now()}-${Math.floor(
+                          Math.random() * 1000000
+                        )}`}
+                        drink={drinkItem}
+                        onClick={() => openModal(drinkItem)}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })}
         </div>
       </div>
 
@@ -49,6 +113,9 @@ export default function Catalog () {
           onClose={closeModal}
         />
       )}
+
+      <div ref={ref} style={{ height: '50px' }} />
+      {isFetchingNextPage && <LoadingSpinner />}
     </section>
   )
 }

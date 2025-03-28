@@ -80,7 +80,7 @@ export const drinks: Drink[] = [
     instructions:
       'Mezcla el jugo de limón con el azúcar hasta disolver. Añade la leche de coco y mezcla bien. Sirve con hielo y decora con una rodaja de limón.',
     image:
-      'https://www.thecocktaildb.com/images/media/drink/5ka4cz1621690382.jpg',
+      'https://www.thecocktaildb.com/images/media/drink/rytuex1598719770.jpg',
     ingredients: [
       { name: 'Jugo de limón', measure: '60ml' },
       { name: 'Leche de coco', measure: '120ml' },
@@ -97,7 +97,7 @@ export const drinks: Drink[] = [
     instructions:
       'Coloca todas las frutas en una licuadora con el yogur y la miel. Licúa hasta obtener una mezcla suave. Sirve inmediatamente.',
     image:
-      'https://www.thecocktaildb.com/images/media/drink/vqquu41504367496.jpg',
+      'https://www.thecocktaildb.com/images/media/drink/kpsajh1504368362.jpg',
     ingredients: [
       { name: 'Mango', measure: '1/2 unidad' },
       { name: 'Piña', measure: '1 taza' },

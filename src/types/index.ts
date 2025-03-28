@@ -8,8 +8,5 @@ export interface Drink {
   name: string
   category: string
   alcoholic: boolean
-  glass: string
-  instructions: string
   image: string
-  ingredients: Ingredient[]
 }

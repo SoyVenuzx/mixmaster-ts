@@ -1,8 +1,16 @@
 import { useAppStore } from '../useAppStore'
 
 export const useSearchFilter = () => {
-  const { drinkSearched, setDrinkSearched, category, setCategory } =
-    useAppStore()
+  const {
+    setFlag,
+    setDrinkSearched,
+    setCategory,
+    setAlcoholic,
+    freezeSearchParams,
+    drinkSearched,
+    category,
+    alcoholic
+  } = useAppStore()
 
   const handleChangeDescription = ({
     target: { value }
@@ -15,8 +23,29 @@ export const useSearchFilter = () => {
     setCategory(value)
   }
 
-  const canSubmit = () =>
-    Object.values({ drinkSearched, category }).includes('')
+  const handleChangeAlcoholic = ({
+    target: { value }
+  }: React.ChangeEvent<HTMLSelectElement>) => {
+    setAlcoholic(value)
+  }
 
-  return { handleChangeDescription, handleChangeCategory, canSubmit }
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    freezeSearchParams()
+
+    setFlag(true)
+    //fetchRecipes({ ingredient: drinkSearched, category })
+  }
+
+  const canSubmit = () =>
+    [drinkSearched, alcoholic, category].some(value => value !== '')
+
+  return {
+    handleChangeDescription,
+    handleChangeCategory,
+    handleChangeAlcoholic,
+    handleSubmit,
+    canSubmit
+  }
 }

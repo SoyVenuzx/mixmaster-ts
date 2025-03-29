@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import DrinkCard from './DrinkCard'
 import RecipeModal from './RecipeModal'
-import type { Drink } from '@/types'
 import SearchFilter from './SearchFilter'
 import { useAppStore } from '@/hooks/useAppStore'
 import { useRecipes } from '@/hooks/responses/useRecipes'
 import { LoadingSpinner } from './LoadingSpinner'
 import { useInView } from 'react-intersection-observer'
+import { DrinkType } from '@/interfaces/categories.interfaces'
+import { Drink } from '@/types'
 
 export default function Catalog () {
   const [selectedDrink, setSelectedDrink] = useState<Drink | null>(null)
@@ -17,24 +18,19 @@ export default function Catalog () {
   const {
     searchCategory,
     searchAlcoholic,
-    flag,
     setFlag,
     drinkSearched,
     category,
     recipes,
     alcoholic
   } = useAppStore()
-  const {
-    recipes: data,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage
-  } = useRecipes({
-    ingredient: drinkSearched,
-    category,
-    alcoholic
-  })
+
+  const { isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useRecipes({
+      ingredient: drinkSearched,
+      category,
+      alcoholic
+    })
 
   useEffect(() => {
     setFlag(true)
@@ -47,7 +43,7 @@ export default function Catalog () {
   }, [hasNextPage, inView, fetchNextPage])
 
   const openModal = (drink: Drink) => {
-    // setSelectedDrink(drink)
+    setSelectedDrink(drink)
     setIsModalOpen(true)
   }
 
@@ -57,13 +53,13 @@ export default function Catalog () {
 
   return (
     <section id='catalog' className='py-20 bg-[hsl(30,20%,98%)]'>
-      <div className='container mx-auto px-4'>
-        <div className='text-center mb-12'>
-          <h2 className='text-4xl font-bold relative inline-block'>
+      <div className='container px-4 mx-auto'>
+        <div className='mb-12 text-center'>
+          <h2 className='relative inline-block text-4xl font-bold'>
             <span className='relative z-10'>Nuestro Catálogo</span>
-            <span className='absolute -bottom-2 left-0 right-0 h-3 bg-orange-200 -rotate-1 z-0'></span>
+            <span className='absolute left-0 right-0 z-0 h-3 bg-orange-200 -bottom-2 -rotate-1'></span>
           </h2>
-          <div className='w-20 h-1 bg-orange-500 mx-auto mt-4'></div>
+          <div className='w-20 h-1 mx-auto mt-4 bg-orange-500'></div>
         </div>
 
         <SearchFilter />
@@ -77,7 +73,7 @@ export default function Catalog () {
                 key={`drink-${Date.now()}-${Math.floor(
                   Math.random() * 1000000
                 )}`}
-                className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'
+                className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
               >
                 {page?.data.map(drink => {
                   const drinkItem = {

@@ -53,30 +53,30 @@ export default function RecipeModal ({
   if (!isOpen) return null
 
   return (
-    <div className='fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 modal-backdrop animate-fade-in'>
+    <div className='fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 modal-backdrop animate-fade-in'>
       <div
         ref={modalRef}
         className='bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto'
       >
-        <div className='sticky top-0 bg-white p-4 border-b flex items-center justify-between'>
+        <div className='sticky top-0 flex items-center justify-between p-4 bg-white border-b'>
           <h3 className='text-xl font-bold'>{drink.name}</h3>
           <button
             onClick={onClose}
             className='p-1 rounded-full hover:bg-gray-100'
           >
-            <X className='h-6 w-6' />
+            <X className='w-6 h-6' />
           </button>
         </div>
 
         <div className='p-6'>
-          <div className='flex flex-col md:flex-row gap-6'>
+          <div className='flex flex-col gap-6 md:flex-row'>
             <div className='md:w-1/3'>
               <img
                 src={drink.image || '/placeholder.svg'}
                 alt={drink.name}
                 className='w-full h-auto rounded-lg'
               />
-              <div className='mt-4 flex flex-wrap gap-2'>
+              <div className='flex flex-wrap gap-2 mt-4'>
                 <span
                   className={`px-3 py-1 rounded-full text-sm ${
                     drink.alcoholic
@@ -86,35 +86,35 @@ export default function RecipeModal ({
                 >
                   {drink.alcoholic ? 'Con alcohol' : 'Sin alcohol'}
                 </span>
-                <span className='px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-700'>
+                <span className='px-3 py-1 text-sm text-gray-700 bg-gray-100 rounded-full'>
                   {drink.category}
                 </span>
-                <span className='px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-700'>
-                  {drink.glass}
-                </span>
+                {/* <span className='px-3 py-1 text-sm text-gray-700 bg-gray-100 rounded-full'>
+                  {drink?.glass ?? ''}
+                </span> */}
               </div>
             </div>
 
             <div className='md:w-2/3'>
-              <h4 className='text-lg font-semibold mb-2'>Ingredientes</h4>
+              <h4 className='mb-2 text-lg font-semibold'>Ingredientes</h4>
               <ul className='mb-6 space-y-2'>
-                {drink.ingredients.map((ingredient, index) => (
+                {/* {drink.ingredients.map((ingredient, index) => (
                   <li key={index} className='flex items-center'>
-                    <span className='w-2 h-2 bg-orange-500 rounded-full mr-2'></span>
+                    <span className='w-2 h-2 mr-2 bg-orange-500 rounded-full'></span>
                     <span>
                       {ingredient.measure} {ingredient.name}
                     </span>
                   </li>
-                ))}
+                ))} */}
               </ul>
 
-              <h4 className='text-lg font-semibold mb-2'>Instrucciones</h4>
-              <p className='text-gray-700 mb-6'>{drink.instructions}</p>
+              <h4 className='mb-2 text-lg font-semibold'>Instrucciones</h4>
+              {/* <p className='mb-6 text-gray-700'>{drink.instructions}</p> */}
 
-              <button className='w-full py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors shadow-md flex items-center justify-center gap-2'>
+              <button className='flex items-center justify-center w-full gap-2 py-3 text-white transition-colors bg-orange-500 rounded-lg shadow-md hover:bg-orange-600'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
-                  className='h-5 w-5'
+                  className='w-5 h-5'
                   viewBox='0 0 20 20'
                   fill='currentColor'
                 >

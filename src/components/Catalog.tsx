@@ -6,7 +6,6 @@ import { useAppStore } from '@/hooks/useAppStore'
 import { useRecipes } from '@/hooks/responses/useRecipes'
 import { LoadingSpinner } from './LoadingSpinner'
 import { useInView } from 'react-intersection-observer'
-import { DrinkType } from '@/interfaces/categories.interfaces'
 import { Drink } from '@/types'
 
 export default function Catalog () {
@@ -42,7 +41,7 @@ export default function Catalog () {
     }
   }, [hasNextPage, inView, fetchNextPage])
 
-  const openModal = (drink: Drink) => {
+  const openModal = async (drink: Drink) => {
     setSelectedDrink(drink)
     setIsModalOpen(true)
   }

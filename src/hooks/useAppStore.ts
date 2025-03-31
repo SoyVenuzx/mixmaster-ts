@@ -19,6 +19,7 @@ export const useAppStore = () => {
 
   const recipes = DrinkStore(state => state.recipes)
   const setRecipes = DrinkStore(state => state.setRecipes)
+
   const flag = DrinkStore(state => state.flag)
   const setFlag = DrinkStore(state => state.setFlag)
 

@@ -1,5 +1,6 @@
 import { StateCreator } from 'zustand'
 import { RecipeSliceType } from '../types/recipes.types'
+import { RecipesResponseType } from '../../interfaces/categories.interfaces'
 
 export const createRecipesSlice: StateCreator<RecipeSliceType> = set => ({
   description: '',
@@ -10,9 +11,8 @@ export const createRecipesSlice: StateCreator<RecipeSliceType> = set => ({
   searchAlcoholic: 'Alcoholic',
 
   categories: [],
-  recipes: [],
+  recipes: {} as RecipesResponseType,
   flag: false,
-
   imageLoading: false,
 
   setDescription: description => set({ description }),

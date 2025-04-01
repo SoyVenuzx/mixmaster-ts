@@ -13,12 +13,9 @@ export const useAppStore = () => {
   const alcoholic = DrinkStore(state => state.alcoholic)
   const setAlcoholic = DrinkStore(state => state.setAlcoholic)
 
-  // const drinks = DrinkStore(state => state.drinks)
   const favorites = DrinkStore(state => state.favorites)
   const handleClickFavorite = DrinkStore(state => state.handleClickFavorite)
   const canDeleteFavorite = DrinkStore(state => state.canDelete)
-
-  const notifications = DrinkStore(state => state.notifications)
 
   const recipes = DrinkStore(state => state.recipes)
   const setRecipes = DrinkStore(state => state.setRecipes)
@@ -34,11 +31,9 @@ export const useAppStore = () => {
   const setImageLoading = DrinkStore(state => state.setImageLoading)
 
   return {
-    // drinks,
     favorites,
     handleClickFavorite,
     canDeleteFavorite,
-    notifications,
     categories,
     drinkSearched,
     setDrinkSearched,

@@ -4,6 +4,7 @@ import { Trash2, X } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { LoadingSpinner } from './LoadingSpinner'
 import { useAppStore } from '@/hooks/useAppStore'
+import toast from 'react-hot-toast'
 
 interface RecipeModalProps {
   drink: Drink
@@ -21,6 +22,7 @@ export default function RecipeModal ({
   const { data: selectedRecipe, isLoading } = useRecipeDetails(
     drink ? drink.id : null
   )
+
   const { canDeleteFavorite, handleClickFavorite } = useAppStore()
 
   useEffect(() => {
@@ -33,9 +35,7 @@ export default function RecipeModal ({
       }
     }
 
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
+    if (isOpen) document.addEventListener('mousedown', handleClickOutside)
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
@@ -65,6 +65,42 @@ export default function RecipeModal ({
   }
 
   if (!selectedRecipe) return
+
+  const handleButtonAction = async () => {
+    const action = canDeleteFavorite(selectedRecipe)
+
+    const promise = new Promise(resolve => {
+      setTimeout(() => {
+        handleClickFavorite(selectedRecipe)
+        onClose()
+        return resolve(true)
+      }, 1200)
+    })
+
+    toast.promise(
+      promise,
+      {
+        success: `Receta ${action ? 'removida' : 'añadida'}`,
+        loading: 'Cargando...',
+        error: 'Error'
+      },
+      {
+        style: {
+          marginTop: '3.5rem',
+          fontSize: '17px',
+          padding: '.8rem',
+          background: 'white',
+          color: '#f97316',
+          fontWeight: '500',
+          border: '1px solid white'
+        },
+        success: {
+          icon: !action ? '🔥' : '💥',
+          duration: 1500
+        }
+      }
+    )
+  }
 
   return (
     <div
@@ -134,10 +170,7 @@ export default function RecipeModal ({
                 {canDeleteFavorite(selectedRecipe) ? (
                   <button
                     className='flex flex-wrap items-center justify-center gap-2 p-4 text-center text-white bg-red-700 rounded-lg'
-                    onClick={() => {
-                      handleClickFavorite(selectedRecipe)
-                      onClose()
-                    }}
+                    onClick={handleButtonAction}
                   >
                     <Trash2 size={15} />
                     <span className='text-md'>Eliminar de Favoritos</span>
@@ -145,10 +178,7 @@ export default function RecipeModal ({
                 ) : (
                   <button
                     className='flex flex-wrap items-center justify-center w-full gap-2 py-3 text-white transition-colors bg-orange-500 rounded-lg shadow-md hover:bg-orange-600'
-                    onClick={() => {
-                      handleClickFavorite(selectedRecipe)
-                      onClose()
-                    }}
+                    onClick={handleButtonAction}
                   >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'

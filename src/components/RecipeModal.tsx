@@ -3,6 +3,7 @@ import type { Drink } from '@/types'
 import { X } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { LoadingSpinner } from './LoadingSpinner'
+import { useAppStore } from '@/hooks/useAppStore'
 
 interface RecipeModalProps {
   drink: Drink
@@ -20,6 +21,7 @@ export default function RecipeModal ({
   const { data: selectedRecipe, isLoading } = useRecipeDetails(
     drink ? drink.id : null
   )
+  const { handleFavorites } = useAppStore()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -128,7 +130,13 @@ export default function RecipeModal ({
                 {selectedRecipe.instructions}
               </p>
 
-              <button className='flex items-center justify-center w-full gap-2 py-3 text-white transition-colors bg-orange-500 rounded-lg shadow-md hover:bg-orange-600'>
+              <button
+                className='flex items-center justify-center w-full gap-2 py-3 text-white transition-colors bg-orange-500 rounded-lg shadow-md hover:bg-orange-600'
+                onClick={() => {
+                  handleFavorites(selectedRecipe)
+                  onClose()
+                }}
+              >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   className='w-5 h-5'

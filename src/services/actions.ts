@@ -130,6 +130,8 @@ export const getRecipeById = async (
     id: rawData.idDrink,
     name: rawData.strDrink,
     thumb: rawData.strDrinkThumb,
+    category: rawData.strCategory,
+    alcoholic: rawData.strAlcoholic,
     instructions: rawData.strInstructions,
     ingredients
   }

@@ -8,5 +8,5 @@ export interface Drink {
   name: string
   category: string
   alcoholic: boolean
-  image: string
+  image?: string
 }

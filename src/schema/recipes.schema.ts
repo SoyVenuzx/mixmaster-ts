@@ -4,6 +4,8 @@ export const RecipeAPIResponseSchema = z.object({
   idDrink: z.string(),
   strDrink: z.string(),
   strDrinkThumb: z.string(),
+  strCategory: z.string(),
+  strAlcoholic: z.string(),
   strInstructions: z.string(),
   strIngredient1: z.string().nullable(),
   strIngredient2: z.string().nullable(),
@@ -24,6 +26,8 @@ export const RecipeDetailsMapSchema = z.object({
   name: z.string(),
   thumb: z.string(),
   instructions: z.string(),
+  category: z.string(),
+  alcoholic: z.string(),
   ingredients: z.array(
     z.object({
       name: z.string(),

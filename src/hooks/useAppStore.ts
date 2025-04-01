@@ -15,7 +15,9 @@ export const useAppStore = () => {
 
   // const drinks = DrinkStore(state => state.drinks)
   const favorites = DrinkStore(state => state.favorites)
-  const handleFavorites = DrinkStore(state => state.handleFavorites)
+  const handleClickFavorite = DrinkStore(state => state.handleClickFavorite)
+  const canDeleteFavorite = DrinkStore(state => state.canDelete)
+
   const notifications = DrinkStore(state => state.notifications)
 
   const recipes = DrinkStore(state => state.recipes)
@@ -34,7 +36,8 @@ export const useAppStore = () => {
   return {
     // drinks,
     favorites,
-    handleFavorites,
+    handleClickFavorite,
+    canDeleteFavorite,
     notifications,
     categories,
     drinkSearched,

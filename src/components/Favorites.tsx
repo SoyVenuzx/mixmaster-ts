@@ -12,10 +12,8 @@ export default function FavoritesList () {
 
   const openModal = (drink: RecipeDetailsMapType) => {
     const newDrink: Drink = {
-      id: drink.id,
-      name: drink.name,
+      ...drink,
       image: drink.thumb,
-      category: drink.category,
       alcoholic: drink.alcoholic === 'Alcoholic'
     }
     setSelectedDrink(newDrink)
@@ -62,10 +60,17 @@ export default function FavoritesList () {
   }
 
   return (
-    <div className='flex flex-col px-24 mx-10 mt-24'>
+    <div className='container flex flex-col mt-24 mx-36'>
+      <div className='mb-12 text-center'>
+        <h2 className='relative inline-block text-4xl font-bold'>
+          <span className='relative z-10'>Favoritos</span>
+          <span className='absolute left-0 right-0 z-0 h-3 bg-orange-200 -bottom-2 -rotate-1'></span>
+        </h2>
+        <div className='w-20 h-1 mx-auto mt-4 bg-orange-500'></div>
+      </div>
+
       <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5'>
         {favorites.map(drink => {
-          console.log({ drink })
           const newDrink: Drink = {
             id: drink.id,
             name: drink.name,

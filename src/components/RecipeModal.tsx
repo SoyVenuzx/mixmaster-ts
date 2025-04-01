@@ -1,6 +1,6 @@
 import { useRecipeDetails } from '@/hooks/responses/useRecipeDetails'
 import type { Drink } from '@/types'
-import { X } from 'lucide-react'
+import { Trash2, X } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { LoadingSpinner } from './LoadingSpinner'
 import { useAppStore } from '@/hooks/useAppStore'
@@ -21,7 +21,7 @@ export default function RecipeModal ({
   const { data: selectedRecipe, isLoading } = useRecipeDetails(
     drink ? drink.id : null
   )
-  const { handleFavorites } = useAppStore()
+  const { canDeleteFavorite, handleClickFavorite } = useAppStore()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -130,27 +130,42 @@ export default function RecipeModal ({
                 {selectedRecipe.instructions}
               </p>
 
-              <button
-                className='flex items-center justify-center w-full gap-2 py-3 text-white transition-colors bg-orange-500 rounded-lg shadow-md hover:bg-orange-600'
-                onClick={() => {
-                  handleFavorites(selectedRecipe)
-                  onClose()
-                }}
-              >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='w-5 h-5'
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
-                >
-                  <path
-                    fillRule='evenodd'
-                    d='M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z'
-                    clipRule='evenodd'
-                  />
-                </svg>
-                Agregar a Favoritos
-              </button>
+              <div className={`grid grid-cols-1 gap-4 grid-cols`}>
+                {canDeleteFavorite(selectedRecipe) ? (
+                  <button
+                    className='flex flex-wrap items-center justify-center gap-2 p-4 text-center text-white bg-red-700 rounded-lg'
+                    onClick={() => {
+                      handleClickFavorite(selectedRecipe)
+                      onClose()
+                    }}
+                  >
+                    <Trash2 size={15} />
+                    <span className='text-md'>Eliminar de Favoritos</span>
+                  </button>
+                ) : (
+                  <button
+                    className='flex flex-wrap items-center justify-center w-full gap-2 py-3 text-white transition-colors bg-orange-500 rounded-lg shadow-md hover:bg-orange-600'
+                    onClick={() => {
+                      handleClickFavorite(selectedRecipe)
+                      onClose()
+                    }}
+                  >
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='w-5 h-5'
+                      viewBox='0 0 20 20'
+                      fill='currentColor'
+                    >
+                      <path
+                        fillRule='evenodd'
+                        d='M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z'
+                        clipRule='evenodd'
+                      />
+                    </svg>
+                    Agregar a Favoritos
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

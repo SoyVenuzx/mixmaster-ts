@@ -1,30 +1,30 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { DrinkType, SearchFilter } from '@/interfaces/categories.interfaces'
+import { SearchFilter } from '@/interfaces/categories.interfaces'
 import { getRecipes } from '@/services/actions'
 import { useEffect } from 'react'
 import { useAppStore } from '../useAppStore'
 import { RecipesResponseType } from '../../interfaces/categories.interfaces'
 
-const preloadImages = async (recipes: DrinkType[]) => {
-  const imagePromises = recipes.map(recipe => {
-    return new Promise<void>(resolve => {
-      const img = new Image()
-      img.src = recipe.strDrinkThumb
-      img.onload = () => resolve()
-      img.onerror = () => resolve() // Resuelve incluso si hay error
-    })
-  })
+// const preloadImages = async (recipes: DrinkType[]) => {
+//   const imagePromises = recipes.map(recipe => {
+//     return new Promise<void>(resolve => {
+//       const img = new Image()
+//       img.src = recipe.strDrinkThumb
+//       img.onload = () => resolve()
+//       img.onerror = () => resolve() // Resuelve incluso si hay error
+//     })
+//   })
 
-  // Establecer un timeout para evitar bloqueos
-  return Promise.allSettled(
-    imagePromises.map(p =>
-      Promise.race([
-        p,
-        new Promise<void>(resolve => setTimeout(resolve, 3000)) // 3 segundos de timeout
-      ])
-    )
-  )
-}
+//   // Establecer un timeout para evitar bloqueos
+//   return Promise.allSettled(
+//     imagePromises.map(p =>
+//       Promise.race([
+//         p,
+//         new Promise<void>(resolve => setTimeout(resolve, 3000)) // 3 segundos de timeout
+//       ])
+//     )
+//   )
+// }
 
 export const useRecipes = (searchFilter: SearchFilter) => {
   const { setRecipes, flag, setFlag } = useAppStore()

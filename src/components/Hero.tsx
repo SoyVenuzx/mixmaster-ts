@@ -1,14 +1,14 @@
 export default function Hero () {
   return (
     <section className='pt-16 bg-gradient-to-b from-orange-50 to-[hsl(30,20%,98%)]'>
-      <div className='container mx-auto px-4 py-20'>
-        <div className='flex flex-col md:flex-row items-center'>
-          <div className='md:w-1/2 mb-10 md:mb-0'>
-            <h1 className='text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-4'>
+      <div className='container px-4 py-20 mx-auto'>
+        <div className='flex flex-col items-center md:flex-row'>
+          <div className='mb-10 md:w-1/2 md:mb-0'>
+            <h1 className='mb-4 text-5xl font-bold leading-tight text-gray-900 md:text-6xl'>
               Descubre el arte de la{' '}
               <span className='text-orange-500'>mixología</span>
             </h1>
-            <p className='text-xl text-gray-600 mb-8'>
+            <p className='mb-8 text-xl text-gray-600'>
               Explora nuestra colección de recetas de bebidas y conviértete en
               un bartender experto desde la comodidad de tu hogar.
             </p>
@@ -19,16 +19,16 @@ export default function Hero () {
                   catalogSection.scrollIntoView({ behavior: 'smooth' })
                 }
               }}
-              className='px-8 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors shadow-md'
+              className='px-8 py-3 text-white transition-colors bg-orange-500 rounded-lg shadow-md hover:bg-orange-600'
             >
               Ver Recetas
             </button>
           </div>
-          <div className='md:w-1/2 flex justify-center'>
+          <div className='flex justify-center md:w-1/2'>
             <div className='relative w-80 h-80'>
-              <div className='overflow-hidden absolute inset-0 bg-orange-500 rounded-full opacity-100'>
+              <div className='absolute inset-0 overflow-hidden bg-orange-500 rounded-full opacity-100'>
                 <img
-                  src='/src/assets/bg.jpg'
+                  src='https://www.hotelviking.com/content/uploads/2023/03/Gin-201.jpg'
                   alt='Cocktail illustration'
                   className='relative z-10 h-full'
                 />

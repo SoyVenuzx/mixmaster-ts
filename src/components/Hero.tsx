@@ -29,7 +29,7 @@ export default function Hero () {
               <div className='absolute inset-0 overflow-hidden bg-orange-500 rounded-full opacity-100'>
                 <img
                   // src='https://www.hotelviking.com/content/uploads/2023/03/Gin-201.jpg'
-                  src='/src/assets/bg.jpg'
+                  src='/images/bg.jpg'
                   alt='Cocktail illustration'
                   className='relative z-10 h-full'
                 />

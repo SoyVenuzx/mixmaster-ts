@@ -23,7 +23,7 @@ export default function Header () {
         <div className='flex items-center justify-between h-16'>
           <Link to='/' className='text-xl font-bold text-orange-500'>
             <div className='flex justify-between w-10'>
-              <img src='/src/assets/logo.svg' alt='Logo' />
+              <img src='/images/logo.svg' alt='Logo' />
               <span>MixMaster</span>
             </div>
           </Link>

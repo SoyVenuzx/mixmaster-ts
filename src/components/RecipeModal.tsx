@@ -2,7 +2,7 @@ import { useRecipeDetails } from '@/hooks/responses/useRecipeDetails'
 import type { Drink } from '@/types'
 import { Trash2, X } from 'lucide-react'
 import { useEffect, useRef } from 'react'
-import { LoadingSpinner } from './LoadingSpinner'
+import { LoadingSpinner } from './utils/LoadingSpinner'
 import { useAppStore } from '@/hooks/useAppStore'
 import toast from 'react-hot-toast'
 
@@ -86,12 +86,7 @@ export default function RecipeModal ({
       },
       {
         style: {
-          marginTop: '3.5rem',
-          fontSize: '17px',
           padding: '.8rem',
-          background: 'white',
-          color: '#f97316',
-          fontWeight: '500',
           border: '1px solid white'
         },
         success: {

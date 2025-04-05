@@ -13,6 +13,8 @@ export default function DrinkCard ({ drink, onClick }: DrinkCardProps) {
     >
       <div className='relative h-48 overflow-hidden'>
         <img
+          srcSet={`${drink.image}?w=300 300w, ${drink.image}?w=600 600w`}
+          sizes='(max-width: 600px) 300px, 600px'
           src={drink.image || '/placeholder.svg?height=300&width=300'}
           alt={drink.name}
           className='object-cover w-full h-full transition-transform duration-300 hover:scale-105'

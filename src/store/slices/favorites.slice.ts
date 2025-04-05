@@ -1,7 +1,10 @@
 import { StateCreator } from 'zustand'
-import { FavoritesStoreType } from '../types/favorites.types'
+import { FavoritesSliceType } from '../types/favorites.types'
 
-export const favoritesSlice: StateCreator<FavoritesStoreType> = (set, get) => ({
+export const createFavoritesSlice: StateCreator<FavoritesSliceType> = (
+  set,
+  get
+) => ({
   favorites: [],
   handleClickFavorite: async recipe => {
     if (get().favorites.some(favorite => favorite.id === recipe.id)) {

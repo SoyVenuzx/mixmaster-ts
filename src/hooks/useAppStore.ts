@@ -30,6 +30,10 @@ export const useAppStore = () => {
   const imageLoading = DrinkStore(state => state.imageLoading)
   const setImageLoading = DrinkStore(state => state.setImageLoading)
 
+  const aiRecipe = DrinkStore(state => state.aiRecipe)
+  const generatedRecipe = DrinkStore(state => state.generatedRecipe)
+  const generateRecipe = DrinkStore(state => state.generateRecipe)
+
   return {
     favorites,
     handleClickFavorite,
@@ -50,6 +54,10 @@ export const useAppStore = () => {
     searchAlcoholic,
     freezeSearchParams,
     imageLoading,
-    setImageLoading
+    setImageLoading,
+
+    aiRecipe,
+    generatedRecipe,
+    generateRecipe
   }
 }

@@ -1,4 +1,4 @@
-import { CoffeeIcon as Cocktail, Heart } from 'lucide-react'
+import { CoffeeIcon as Cocktail, Heart, Sparkles } from 'lucide-react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 export default function Header () {
@@ -57,6 +57,19 @@ export default function Header () {
               <div className='flex items-center gap-2 text-gray-800 transition-colors hover:text-orange-500'>
                 <Heart className='w-5 h-5 text-orange-500' />
                 <span>Favoritos</span>
+              </div>
+            </NavLink>
+            <NavLink
+              to={'/generate'}
+              className={({ isActive }) =>
+                isActive
+                  ? 'border-2 border-orange-500 py-2 px-3 rounded-full'
+                  : ''
+              }
+            >
+              <div className='flex items-center gap-2 text-gray-800 transition-colors hover:text-orange-500'>
+                <Sparkles className='text-orange-500 h5-w-5' />
+                <span>Generar con IA</span>
               </div>
             </NavLink>
           </nav>

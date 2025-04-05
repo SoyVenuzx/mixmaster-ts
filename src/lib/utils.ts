@@ -12,3 +12,7 @@ export const sleep = (seconds: number): Promise<boolean> => {
     }, seconds * 1000)
   })
 }
+
+export function isObjectEmpty (obj: any) {
+  return obj && typeof obj === 'object' && Object.keys(obj).length === 0
+}

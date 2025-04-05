@@ -1,5 +1,5 @@
-import DrinkCard from './DrinkCard'
-import RecipeModal from './RecipeModal'
+import DrinkCard from '../components/DrinkCard'
+import RecipeModal from '../components/RecipeModal'
 import { useState } from 'react'
 import type { Drink } from '@/types'
 import { useAppStore } from '@/hooks/useAppStore'

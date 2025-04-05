@@ -1,15 +1,7 @@
 import type React from 'react'
 
 import { useState } from 'react'
-import {
-  Sparkles,
-  Loader2,
-  X,
-  ThumbsUp,
-  ThumbsDown,
-  Share2,
-  Bookmark
-} from 'lucide-react'
+import { Sparkles, Loader2, X } from 'lucide-react'
 import { useAppStore } from '@/hooks/useAppStore'
 import toast from 'react-hot-toast'
 import { isObjectEmpty } from '@/lib/utils'
